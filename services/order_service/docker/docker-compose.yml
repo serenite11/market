@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8001:8001'
+    container_name: order_app
+    restart: always
+  postgres:
+    image: postgres:15
+    ports:
+      - '5432:5432'
+    container_name: order_postgres
+    restart: unless-stopped
+    volumes:
+      - ./db/data:/var/lib/postgresql/data

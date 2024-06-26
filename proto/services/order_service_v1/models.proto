@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package order_service_v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/order_service_v1;order_service_v1';
+
+import "google/protobuf/timestamp.proto";
+import "services/order_service_v1/const.proto";
+
+message Order {
+  string                    id         = 1;
+  double                    amount     = 2;
+  google.protobuf.Timestamp created_at = 3;
+  OrderStatus               status     = 4;
+}
+

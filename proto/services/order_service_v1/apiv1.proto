@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package order_service_v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/order_service_v1;order_service_v1';
+
+import "google/protobuf/empty.proto";
+import "services/order_service_v1/dto.proto";
+
+service OrderService {
+  rpc CreateOrder (CreateOrder.Request) returns (CreateOrder.Response);
+}

@@ -1,0 +1,8 @@
+version: '3'
+tasks:
+  service-up:
+    cmd: docker-compose up --build -d
+  service-down:
+    cmd: docker-compose down
+  run:
+    cmd: go run cmd/api/main.go

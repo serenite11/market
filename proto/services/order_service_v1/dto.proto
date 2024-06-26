@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package order_service_v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/order_service_v1;order_service_v1';
+
+message CreateOrder {
+  message Request {}
+
+  message Response {}
+
+}
+

@@ -1,0 +1,6 @@
+version: '3'
+tasks:
+  gen-protos:
+    cmds:
+      - protofmt -d -w ./proto/**/**/*.proto
+      - buf generate
