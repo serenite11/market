@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package product_storage_v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/product_storage_v1;product_storage_v1';
+
+import "services/product_storage_v1/models.proto";
+
+message GetProductById {
+  message Request {
+    string id = 1;
+  }
+
+  message Response {
+    Product product = 1;
+  }
+
+}
+
+message FetchProducts {
+  message Request {
+    message Filter {
+      optional string country = 1;
+               int64  limit   = 2;
+               int64  offset  = 3;
+    }
+
+  }
+
+  message Response {
+    repeated Product products = 1;
+  }
+
+}
+

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package product_storage_v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/product_storage_v1;product_storage_v1';
+
+message Product {
+  string id          = 1;
+  string price       = 2;
+  string description = 3;
+  string country     = 4;
+}
+
