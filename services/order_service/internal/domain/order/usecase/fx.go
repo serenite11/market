@@ -1,4 +1,4 @@
-package usecase
+package order_usecase
 
 import (
 	"go.uber.org/fx"

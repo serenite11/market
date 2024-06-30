@@ -16,7 +16,7 @@ func InitPostgres(db storage_postgres.Postgres) *postgres {
 	return &postgres{db: db}
 }
 
-const createOrderQuery = `INSERT INTO order (id,amount) values ($1,$2) RETURNING id`
+const createOrderQuery = `INSERT INTO order (id,amount,created_at,updated_at) values ($1,$2,now(),now()) RETURNING id`
 
 func (p postgres) Create(ctx context.Context, order *order_model.Order) (*uuid.UUID, error) {
 	var data uuid.UUID

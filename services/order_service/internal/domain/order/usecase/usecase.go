@@ -1,11 +1,10 @@
-package usecase
+package order_usecase
 
 import (
 	"context"
 	"github.com/google/uuid"
-	"github.com/lib/pq"
 	"github.com/serenite11/market/proto/services/order_service_v1"
-	"github.com/serenite11/market/proto/services/product_storage_v1"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"order-service/internal/clients"
 	order_model "order-service/internal/domain/order/model"
 	"order-service/internal/factory"
@@ -26,38 +25,59 @@ func New(factory *factory.Factory, gClients *clients.GClients) *uc {
 	}
 }
 
-func (u uc) CreateOrder(ctx context.Context, request order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error) {
-
-	for _, item := range request.Products {
-		product, err := u.clients.ProductStorageClient().GetProductById(ctx, &product_storage_v1.GetProductById_Request{
-			Id: item.Id,
-		})
-		if err != nil {
-			return nil, err
-		}
+func (u uc) CreateOrder(ctx context.Context, request *order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error) {
+	userId, err := uuid.Parse(request.UserId)
+	if err != nil {
+		return nil, ErrInvalidUser
 	}
 
-	u.factory.OrderRepo().Create(ctx, &order_model.Order{
-		Id:          uuid.Must(uuid.NewV7()),
-		Amount:      0,
-		UserId:      uuid.UUID{},
-		Products:    nil,
-		CreatedAt:   time.Time{},
-		UpdatedAt:   time.Time{},
-		CompletedAt: pq.NullTime{},
-	})
+	var amount float64
+
+	for _, item := range request.GetProducts() {
+		amount += item.Price * float64(item.Quantity)
+	}
+
+	order := order_model.Order{}
+
+	order.
+		SetId(uuid.Must(uuid.NewV7())).
+		SetUserId(userId).
+		SetAmount(amount)
+
+	ctxCreateOrder, cancel := context.WithTimeout(ctx, time.Second*2)
+	defer cancel()
+	orderId, err := u.factory.OrderRepo().Create(ctxCreateOrder, &order)
+	if err != nil {
+		return nil, err
+	}
 
 	return &order_service_v1.CreateOrder_Response{
-		OrderId: "",
-		Status:  0,
+		OrderId: orderId.String(),
+		Status:  order_service_v1.OrderStatus_CREATED,
 	}, nil
 }
 
-func (u uc) GetOrderById(ctx context.Context) (order_service_v1.Order, error) {
-	u.factory.OrderRepo().GetById(ctx)
+func (u uc) GetOrderById(ctx context.Context, request *order_service_v1.GetOrderById_Request) (*order_service_v1.GetOrderById_Response, error) {
+	id, err := uuid.Parse(request.GetId())
+	if err != nil {
+		return nil, err
+	}
+
+	order, err := u.factory.OrderRepo().GetById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &order_service_v1.GetOrderById_Response{Order: &order_service_v1.Order{
+		Id:          order.Id.String(),
+		Amount:      order.Amount,
+		Status:      order.Status,
+		CreatedAt:   timestamppb.New(order.CreatedAt),
+		UpdatedAt:   timestamppb.New(order.UpdatedAt),
+		CompletedAt: timestamppb.New(order.CompletedAt.Time),
+	}}, nil
 }
 
-func (u uc) FetchOrders() error {
-	//TODO implement me
-	panic("implement me")
+func (u uc) FetchOrders(ctx context.Context) error {
+	return nil
 }

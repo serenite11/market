@@ -1,4 +1,4 @@
-package usecase
+package order_usecase
 
 import (
 	"context"
@@ -7,8 +7,8 @@ import (
 
 type (
 	UseCase interface {
-		CreateOrder(ctx context.Context, request order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error)
-		GetOrderById() (order_service_v1.Order, error)
-		FetchOrders() error
+		CreateOrder(ctx context.Context, request *order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error)
+		GetOrderById(ctx context.Context, request *order_service_v1.GetOrderById_Request) (*order_service_v1.GetOrderById_Response, error)
+		FetchOrders(ctx context.Context) error
 	}
 )
