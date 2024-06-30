@@ -8,7 +8,7 @@ import (
 
 func New() *fx.App {
 	return fx.New(
-		usecase.NewModule()
+		usecase.NewModule(),
 		fx.Provide(
 			logger_zap.New(),
 		),

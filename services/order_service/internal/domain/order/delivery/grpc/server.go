@@ -32,6 +32,7 @@ func New(cfg *Config, zap *zap.Logger) *Server {
 func (s *Server) Start(ctx context.Context) error {
 	reflection.Register(s.grpc)
 
+	s.grpc.RegisterService(s.grpc)
 	go func() {
 		if err := s.run(ctx); err != nil {
 			s.zap.Error("failed to start server", zap.Error(err))

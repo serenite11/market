@@ -4,10 +4,30 @@ package order_service_v1;
 
 option go_package = 'github.com/serenite11/market/proto/services/order_service_v1;order_service_v1';
 
-message CreateOrder {
-  message Request {}
+import "services/order_service_v1/const.proto";
+import "services/order_service_v1/models.proto";
 
-  message Response {}
+message CreateOrder {
+  message Request {
+             string       user_id  = 1;
+    repeated ProductOrder products = 2;
+  }
+
+  message Response {
+    string      order_id = 1;
+    OrderStatus status   = 2;
+  }
+
+}
+
+message GetOrderById {
+  message Request {
+    string id = 1;
+  }
+
+  message Response {
+    Order order = 1;
+  }
 
 }
 
