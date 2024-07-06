@@ -8,7 +8,7 @@ import (
 func NewModule() fx.Option {
 	return fx.Module("order_usecase",
 		fx.Provide(
-			New,
+			fx.Annotate(New, fx.As(new(UseCase))),
 		),
 		fx.Decorate(func(zap *zap.Logger) *zap.Logger {
 			return zap.Named("order_usecase")

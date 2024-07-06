@@ -1,4 +1,4 @@
-package delivery_grpc
+package api_grpc
 
 import "go.uber.org/fx"
 
