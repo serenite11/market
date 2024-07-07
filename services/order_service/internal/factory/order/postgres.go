@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/huandu/go-sqlbuilder"
-	order_model "order-service/internal/domain/order/model"
-	storage_postgres "order-service/pkg/storage/postgres"
+	order_model "github.com/serenite11/market/services/order-service/internal/domain/order/model"
+	storage_postgres "github.com/serenite11/market/services/order-service/pkg/storage/postgres"
 )
 
 type postgres struct {
@@ -52,7 +52,7 @@ func (p postgres) Update(ctx context.Context) error {
 	return nil
 }
 
-const fetchByUserIdQuery = `SELECT id,amount,created_at FROM "order" WHERE id = $1;`
+const fetchByUserIdQuery = `SELECT id,amount,created_at FROM "order" WHERE user_id = $1;`
 
 func (p postgres) FetchByUserId(ctx context.Context, userId uuid.UUID) ([]*order_model.Order, error) {
 	var orders []*order_model.Order

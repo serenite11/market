@@ -3,7 +3,7 @@ package api_grpc
 import (
 	"context"
 	"github.com/serenite11/market/proto/services/order_service_v1"
-	order_usecase "order-service/internal/domain/order/usecase"
+	order_usecase "github.com/serenite11/market/services/order-service/internal/domain/order/usecase"
 )
 
 type handler struct {

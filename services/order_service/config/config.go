@@ -2,13 +2,13 @@ package config
 
 import (
 	"fmt"
+	api_grpc "github.com/serenite11/market/services/order-service/internal/api/grpc"
 	"go.uber.org/config"
 	"go.uber.org/fx"
-	delivery_grpc "order-service/internal/domain/order/delivery/grpc"
 )
 
 type Config struct {
-	Grpc delivery_grpc.Config `yaml:"grpc"`
+	Grpc api_grpc.Config `yaml:"grpc"`
 }
 
 type ResultConfig struct {

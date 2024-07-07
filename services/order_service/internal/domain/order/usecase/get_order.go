@@ -27,7 +27,3 @@ func (u uc) GetOrderById(ctx context.Context, request *order_service_v1.GetOrder
 		CompletedAt: timestamppb.New(order.CompletedAt.Time),
 	}}, nil
 }
-
-func (u uc) FetchOrders(ctx context.Context) error {
-	return nil
-}

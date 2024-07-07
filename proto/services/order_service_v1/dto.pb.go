@@ -96,6 +96,44 @@ func (*GetOrderById) Descriptor() ([]byte, []int) {
 	return file_services_order_service_v1_dto_proto_rawDescGZIP(), []int{1}
 }
 
+type FetchOrdersByUserId struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *FetchOrdersByUserId) Reset() {
+	*x = FetchOrdersByUserId{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FetchOrdersByUserId) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchOrdersByUserId) ProtoMessage() {}
+
+func (x *FetchOrdersByUserId) ProtoReflect() protoreflect.Message {
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchOrdersByUserId.ProtoReflect.Descriptor instead.
+func (*FetchOrdersByUserId) Descriptor() ([]byte, []int) {
+	return file_services_order_service_v1_dto_proto_rawDescGZIP(), []int{2}
+}
+
 type CreateOrder_Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -108,7 +146,7 @@ type CreateOrder_Request struct {
 func (x *CreateOrder_Request) Reset() {
 	*x = CreateOrder_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_services_order_service_v1_dto_proto_msgTypes[2]
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -121,7 +159,7 @@ func (x *CreateOrder_Request) String() string {
 func (*CreateOrder_Request) ProtoMessage() {}
 
 func (x *CreateOrder_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_services_order_service_v1_dto_proto_msgTypes[2]
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +201,7 @@ type CreateOrder_Response struct {
 func (x *CreateOrder_Response) Reset() {
 	*x = CreateOrder_Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_services_order_service_v1_dto_proto_msgTypes[3]
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -176,7 +214,7 @@ func (x *CreateOrder_Response) String() string {
 func (*CreateOrder_Response) ProtoMessage() {}
 
 func (x *CreateOrder_Response) ProtoReflect() protoreflect.Message {
-	mi := &file_services_order_service_v1_dto_proto_msgTypes[3]
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -217,7 +255,7 @@ type GetOrderById_Request struct {
 func (x *GetOrderById_Request) Reset() {
 	*x = GetOrderById_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_services_order_service_v1_dto_proto_msgTypes[4]
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -230,7 +268,7 @@ func (x *GetOrderById_Request) String() string {
 func (*GetOrderById_Request) ProtoMessage() {}
 
 func (x *GetOrderById_Request) ProtoReflect() protoreflect.Message {
-	mi := &file_services_order_service_v1_dto_proto_msgTypes[4]
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -264,7 +302,7 @@ type GetOrderById_Response struct {
 func (x *GetOrderById_Response) Reset() {
 	*x = GetOrderById_Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_services_order_service_v1_dto_proto_msgTypes[5]
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -277,7 +315,7 @@ func (x *GetOrderById_Response) String() string {
 func (*GetOrderById_Response) ProtoMessage() {}
 
 func (x *GetOrderById_Response) ProtoReflect() protoreflect.Message {
-	mi := &file_services_order_service_v1_dto_proto_msgTypes[5]
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -296,6 +334,100 @@ func (*GetOrderById_Response) Descriptor() ([]byte, []int) {
 func (x *GetOrderById_Response) GetOrder() *Order {
 	if x != nil {
 		return x.Order
+	}
+	return nil
+}
+
+type FetchOrdersByUserId_Request struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+}
+
+func (x *FetchOrdersByUserId_Request) Reset() {
+	*x = FetchOrdersByUserId_Request{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FetchOrdersByUserId_Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchOrdersByUserId_Request) ProtoMessage() {}
+
+func (x *FetchOrdersByUserId_Request) ProtoReflect() protoreflect.Message {
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchOrdersByUserId_Request.ProtoReflect.Descriptor instead.
+func (*FetchOrdersByUserId_Request) Descriptor() ([]byte, []int) {
+	return file_services_order_service_v1_dto_proto_rawDescGZIP(), []int{2, 0}
+}
+
+func (x *FetchOrdersByUserId_Request) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type FetchOrdersByUserId_Response struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Orders []*Order `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
+}
+
+func (x *FetchOrdersByUserId_Response) Reset() {
+	*x = FetchOrdersByUserId_Response{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_services_order_service_v1_dto_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FetchOrdersByUserId_Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchOrdersByUserId_Response) ProtoMessage() {}
+
+func (x *FetchOrdersByUserId_Response) ProtoReflect() protoreflect.Message {
+	mi := &file_services_order_service_v1_dto_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchOrdersByUserId_Response.ProtoReflect.Descriptor instead.
+func (*FetchOrdersByUserId_Response) Descriptor() ([]byte, []int) {
+	return file_services_order_service_v1_dto_proto_rawDescGZIP(), []int{2, 1}
+}
+
+func (x *FetchOrdersByUserId_Response) GetOrders() []*Order {
+	if x != nil {
+		return x.Orders
 	}
 	return nil
 }
@@ -330,13 +462,20 @@ var file_services_order_service_v1_dto_proto_rawDesc = []byte{
 	0x39, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d, 0x0a, 0x05, 0x6f,
 	0x72, 0x64, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6f, 0x72, 0x64,
 	0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x76, 0x31, 0x2e, 0x4f, 0x72,
-	0x64, 0x65, 0x72, 0x52, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x4f, 0x5a, 0x4d, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x65, 0x72, 0x65, 0x6e, 0x69, 0x74,
-	0x65, 0x31, 0x31, 0x2f, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f,
-	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x76, 0x31, 0x3b, 0x6f, 0x72, 0x64, 0x65, 0x72,
-	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x64, 0x65, 0x72, 0x52, 0x05, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x22, 0x76, 0x0a, 0x13, 0x46, 0x65,
+	0x74, 0x63, 0x68, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72, 0x49,
+	0x64, 0x1a, 0x22, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07,
+	0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75,
+	0x73, 0x65, 0x72, 0x49, 0x64, 0x1a, 0x3b, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x2f, 0x0a, 0x06, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x17, 0x2e, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x5f, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x06, 0x6f, 0x72, 0x64, 0x65,
+	0x72, 0x73, 0x42, 0x4f, 0x5a, 0x4d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x73, 0x65, 0x72, 0x65, 0x6e, 0x69, 0x74, 0x65, 0x31, 0x31, 0x2f, 0x6d, 0x61, 0x72, 0x6b,
+	0x65, 0x74, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x73, 0x2f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f,
+	0x76, 0x31, 0x3b, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x5f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -351,27 +490,31 @@ func file_services_order_service_v1_dto_proto_rawDescGZIP() []byte {
 	return file_services_order_service_v1_dto_proto_rawDescData
 }
 
-var file_services_order_service_v1_dto_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_services_order_service_v1_dto_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_services_order_service_v1_dto_proto_goTypes = []interface{}{
-	(*CreateOrder)(nil),           // 0: order_service_v1.CreateOrder
-	(*GetOrderById)(nil),          // 1: order_service_v1.GetOrderById
-	(*CreateOrder_Request)(nil),   // 2: order_service_v1.CreateOrder.Request
-	(*CreateOrder_Response)(nil),  // 3: order_service_v1.CreateOrder.Response
-	(*GetOrderById_Request)(nil),  // 4: order_service_v1.GetOrderById.Request
-	(*GetOrderById_Response)(nil), // 5: order_service_v1.GetOrderById.Response
-	(*ProductOrder)(nil),          // 6: order_service_v1.ProductOrder
-	(OrderStatus)(0),              // 7: order_service_v1.OrderStatus
-	(*Order)(nil),                 // 8: order_service_v1.Order
+	(*CreateOrder)(nil),                  // 0: order_service_v1.CreateOrder
+	(*GetOrderById)(nil),                 // 1: order_service_v1.GetOrderById
+	(*FetchOrdersByUserId)(nil),          // 2: order_service_v1.FetchOrdersByUserId
+	(*CreateOrder_Request)(nil),          // 3: order_service_v1.CreateOrder.Request
+	(*CreateOrder_Response)(nil),         // 4: order_service_v1.CreateOrder.Response
+	(*GetOrderById_Request)(nil),         // 5: order_service_v1.GetOrderById.Request
+	(*GetOrderById_Response)(nil),        // 6: order_service_v1.GetOrderById.Response
+	(*FetchOrdersByUserId_Request)(nil),  // 7: order_service_v1.FetchOrdersByUserId.Request
+	(*FetchOrdersByUserId_Response)(nil), // 8: order_service_v1.FetchOrdersByUserId.Response
+	(*ProductOrder)(nil),                 // 9: order_service_v1.ProductOrder
+	(OrderStatus)(0),                     // 10: order_service_v1.OrderStatus
+	(*Order)(nil),                        // 11: order_service_v1.Order
 }
 var file_services_order_service_v1_dto_proto_depIdxs = []int32{
-	6, // 0: order_service_v1.CreateOrder.Request.products:type_name -> order_service_v1.ProductOrder
-	7, // 1: order_service_v1.CreateOrder.Response.status:type_name -> order_service_v1.OrderStatus
-	8, // 2: order_service_v1.GetOrderById.Response.order:type_name -> order_service_v1.Order
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	9,  // 0: order_service_v1.CreateOrder.Request.products:type_name -> order_service_v1.ProductOrder
+	10, // 1: order_service_v1.CreateOrder.Response.status:type_name -> order_service_v1.OrderStatus
+	11, // 2: order_service_v1.GetOrderById.Response.order:type_name -> order_service_v1.Order
+	11, // 3: order_service_v1.FetchOrdersByUserId.Response.orders:type_name -> order_service_v1.Order
+	4,  // [4:4] is the sub-list for method output_type
+	4,  // [4:4] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_services_order_service_v1_dto_proto_init() }
@@ -407,7 +550,7 @@ func file_services_order_service_v1_dto_proto_init() {
 			}
 		}
 		file_services_order_service_v1_dto_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateOrder_Request); i {
+			switch v := v.(*FetchOrdersByUserId); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -419,7 +562,7 @@ func file_services_order_service_v1_dto_proto_init() {
 			}
 		}
 		file_services_order_service_v1_dto_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateOrder_Response); i {
+			switch v := v.(*CreateOrder_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -431,7 +574,7 @@ func file_services_order_service_v1_dto_proto_init() {
 			}
 		}
 		file_services_order_service_v1_dto_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetOrderById_Request); i {
+			switch v := v.(*CreateOrder_Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -443,7 +586,43 @@ func file_services_order_service_v1_dto_proto_init() {
 			}
 		}
 		file_services_order_service_v1_dto_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetOrderById_Request); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_services_order_service_v1_dto_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetOrderById_Response); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_services_order_service_v1_dto_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FetchOrdersByUserId_Request); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_services_order_service_v1_dto_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FetchOrdersByUserId_Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -461,7 +640,7 @@ func file_services_order_service_v1_dto_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_services_order_service_v1_dto_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

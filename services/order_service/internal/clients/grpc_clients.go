@@ -1,6 +1,6 @@
 package clients
 
-import "order-service/internal/clients/product"
+import "github.com/serenite11/market/services/order-service/internal/clients/product"
 
 type GClients struct {
 	productAPI *product.Client

@@ -4,7 +4,8 @@ import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/serenite11/market/proto/services/order_service_v1"
-	order_model "order-service/internal/domain/order/model"
+	order_model "github.com/serenite11/market/services/order-service/internal/domain/order/model"
+	"github.com/serenite11/market/services/order-service/internal/factory"
 	"time"
 )
 
@@ -25,12 +26,20 @@ func (u uc) CreateOrder(ctx context.Context, request *order_service_v1.CreateOrd
 	order.
 		SetId(uuid.Must(uuid.NewV7())).
 		SetUserId(userId).
-		SetAmount(amount)
+		SetAmount(amount).
+		SetProducts(request.GetProducts())
 
 	ctxCreateOrder, cancel := context.WithTimeout(ctx, time.Second*2)
 	defer cancel()
-	orderId, err := u.factory.OrderRepo().Create(ctxCreateOrder, &order)
-	if err != nil {
+	var orderId uuid.UUID
+	if err = u.factory.ExecuteTx(ctx, func(tx *factory.Factory) error {
+		oId, err := tx.OrderRepo().Create(ctxCreateOrder, &order)
+		if err != nil {
+			return err
+		}
+		orderId = *oId
+		return nil
+	}); err != nil {
 		return nil, err
 	}
 

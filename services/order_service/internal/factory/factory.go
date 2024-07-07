@@ -2,7 +2,7 @@ package factory
 
 import (
 	"context"
-	storage_postgres "order-service/pkg/storage/postgres"
+	storage_postgres "github.com/serenite11/market/services/order-service/pkg/storage/postgres"
 )
 
 type Factory struct {

@@ -31,3 +31,23 @@ message GetOrderById {
 
 }
 
+message FetchOrdersByUserId {
+  message Request {
+    string user_id = 1;
+  }
+
+  message Response {
+    repeated Order orders = 1;
+  }
+
+}
+
+message CancelOrder {
+  message Request {
+    string order_id = 1;
+  }
+
+  message Response {}
+
+}
+
