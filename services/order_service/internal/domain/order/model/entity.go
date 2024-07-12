@@ -18,6 +18,10 @@ type Order struct {
 	CompletedAt pq.NullTime                  `db:"completed_at"`
 }
 
+func (o *Order) GetId() string{
+	return o.Id.String()
+}
+
 func (o *Order) SetId(id uuid.UUID) *Order {
 	o.Id = id
 	return o

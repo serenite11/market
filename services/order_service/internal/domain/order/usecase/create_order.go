@@ -31,7 +31,9 @@ func (u uc) CreateOrder(ctx context.Context, request *order_service_v1.CreateOrd
 
 	ctxCreateOrder, cancel := context.WithTimeout(ctx, time.Second*2)
 	defer cancel()
+
 	var orderId uuid.UUID
+	
 	if err = u.factory.ExecuteTx(ctx, func(tx *factory.Factory) error {
 		oId, err := tx.OrderRepo().Create(ctxCreateOrder, &order)
 		if err != nil {

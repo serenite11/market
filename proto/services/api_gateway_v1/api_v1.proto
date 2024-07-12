@@ -6,5 +6,4 @@ option go_package = 'github.com/serenite11/market/proto/services/api_gateway_v1;
 
 import "services/api_gateway_v1/dto.proto";
 
-service ApiGateway {
-}
+service ApiGateway {}
