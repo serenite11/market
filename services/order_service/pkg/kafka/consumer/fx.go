@@ -1,4 +1,4 @@
-package clients
+package kafka_consumer
 
 import (
 	"go.uber.org/fx"
@@ -6,12 +6,13 @@ import (
 )
 
 func NewModule() fx.Option {
-	return fx.Module("clients",
+	return fx.Module("consumer",
 		fx.Provide(
-			NewGClients,
-			),
+			NewConfig,
+			fx.Annotate(New, fx.As(new(Consumer))),
+		),
 		fx.Decorate(func(log *zap.Logger) *zap.Logger {
-			return log.Named("clients")
+			return log.Named("consumer")
 		}),
 	)
 }

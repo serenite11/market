@@ -3,29 +3,32 @@ package kafka_consumer
 import (
 	"context"
 	"github.com/IBM/sarama"
+	"go.uber.org/zap"
 	"time"
 )
 
 type ConsumeFunc = func(ctx context.Context, msg *sarama.ConsumerMessage) error
 
 type Consumer interface {
-	Start(ctx context.Context) error
+	Init(ctx context.Context) error
 	StartConsume(ctx context.Context, cb ConsumeFunc) error
 	Stop(ctx context.Context) error
 }
 
 type client struct {
-	cfg *Config
-	sarama.Consumer
+	cfg      *Config
+	consumer sarama.Consumer
+	log      *zap.Logger
 }
 
-func New(cfg *Config) Consumer {
+func New(cfg *Config, log *zap.Logger) Consumer {
 	return &client{
 		cfg: cfg,
+		log: log,
 	}
 }
 
-func (c *client) Start(_ context.Context) error {
+func (c *client) Init(_ context.Context) error {
 	saramaConfig := sarama.NewConfig()
 
 	saramaConfig.Version = sarama.V1_0_0_0
@@ -37,14 +40,27 @@ func (c *client) Start(_ context.Context) error {
 	if err != nil {
 		return err
 	}
-	c.Consumer = client
+	c.consumer = client
 	return nil
 }
 
 func (c *client) StartConsume(ctx context.Context, cb ConsumeFunc) error {
+	partitions, err := c.consumer.ConsumePartition(c.cfg.Topic, 0, sarama.OffsetNewest)
+	if err != nil {
+		return err
+	}
+	for v := range partitions.Messages() {
+		if err = cb(context.Background(), v); err != nil {
+			c.log.Error("Consumer error", zap.Error(err),
+				zap.String("topic", c.cfg.Topic),
+				zap.Any("consume_message", v),
+			)
+		}
+	}
+
 	return nil
 }
 
 func (c *client) Stop(_ context.Context) error {
-	return c.Close()
+	return c.consumer.Close()
 }

@@ -1,7 +1,7 @@
-package logger_zap
+package logger
 
 import (
-	"github.com/mattn/go-colorable"
+	"github.com/onsi/ginkgo/reporters/stenographer/support/go-colorable"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )

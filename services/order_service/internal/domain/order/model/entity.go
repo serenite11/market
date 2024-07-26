@@ -18,10 +18,6 @@ type Order struct {
 	CompletedAt pq.NullTime                  `db:"completed_at"`
 }
 
-func (o *Order) GetId() string{
-	return o.Id.String()
-}
-
 func (o *Order) SetId(id uuid.UUID) *Order {
 	o.Id = id
 	return o
@@ -48,10 +44,6 @@ func (o *Order) SetProducts(products any) *Order {
 }
 func (o *Order) SetCreatedAt(createdAt time.Time) *Order {
 	o.CreatedAt = createdAt
-	return o
-}
-func (o *Order) SetUpdatedAt(updatedAt time.Time) *Order {
-	o.UpdatedAt = updatedAt
 	return o
 }
 func (o *Order) SetCompletedAt(completedAt time.Time) *Order {

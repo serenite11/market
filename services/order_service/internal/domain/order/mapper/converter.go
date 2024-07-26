@@ -23,18 +23,18 @@ type Converter interface {
 	// goverter:map CreatedAt | ConvertTime
 	// goverter:map UpdatedAt | ConvertTime
 	// goverter:map CompletedAt | ConvertPQTime
-	FromEntityOrderToProto(order *order_model.Order) (*order_service_v1.Order)
-	FromEntityOrdersToProto(orders []*order_model.Order) ([]*order_service_v1.Order)
+	FromEntityOrderToProto(order *order_model.Order) *order_service_v1.Order
+	FromEntityOrdersToProto(orders []*order_model.Order) []*order_service_v1.Order
 }
 
-func ConvertId(uuid uuid.UUID) string{
+func ConvertId(uuid uuid.UUID) string {
 	return uuid.String()
 }
 
-func ConvertTime(time time.Time) *timestamppb.Timestamp{
+func ConvertTime(time time.Time) *timestamppb.Timestamp {
 	return timestamppb.New(time)
 }
 
-func ConvertPQTime(time pq.NullTime) *timestamppb.Timestamp{
+func ConvertPQTime(time pq.NullTime) *timestamppb.Timestamp {
 	return timestamppb.New(time.Time)
 }

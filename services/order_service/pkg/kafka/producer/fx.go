@@ -1,4 +1,4 @@
-package clients
+package kafka_producer
 
 import (
 	"go.uber.org/fx"
@@ -6,12 +6,13 @@ import (
 )
 
 func NewModule() fx.Option {
-	return fx.Module("clients",
+	return fx.Module("producer",
 		fx.Provide(
-			NewGClients,
-			),
+			NewConfig,
+			fx.Annotate(New, fx.As(new(Producer))),
+		),
 		fx.Decorate(func(log *zap.Logger) *zap.Logger {
-			return log.Named("clients")
+			return log.Named("producer")
 		}),
 	)
 }

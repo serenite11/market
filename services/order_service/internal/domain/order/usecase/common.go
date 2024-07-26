@@ -2,9 +2,19 @@ package order_usecase
 
 import (
 	"context"
+
 	"github.com/serenite11/market/proto/services/order_service_v1"
 	"github.com/serenite11/market/services/order-service/internal/clients"
+	"github.com/serenite11/market/services/order-service/internal/domain/order/mapper"
 	"github.com/serenite11/market/services/order-service/internal/factory"
+)
+
+type (
+	UseCase interface {
+		CreateOrder(ctx context.Context, request *order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error)
+		GetOrderById(ctx context.Context, request *order_service_v1.GetOrderById_Request) (*order_service_v1.GetOrderById_Response, error)
+		FetchOrders(ctx context.Context, request *order_service_v1.FetchOrdersByUserId_Request) (*order_service_v1.FetchOrdersByUserId_Response, error)
+	}
 )
 
 type uc struct {
@@ -21,10 +31,6 @@ func New(factory *factory.Factory, gClients *clients.GClients) *uc {
 	}
 }
 
-type (
-	UseCase interface {
-		CreateOrder(ctx context.Context, request *order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error)
-		GetOrderById(ctx context.Context, request *order_service_v1.GetOrderById_Request) (*order_service_v1.GetOrderById_Response, error)
-		FetchOrders(ctx context.Context,request *order_service_v1.FetchOrdersByUserId_Request) (*order_service_v1.FetchOrdersByUserId_Response, error)
-	}
-)
+func (u uc) Mapper() mapper.Converter {
+	return &mapper.OrderConverter{}
+}

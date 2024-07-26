@@ -24,16 +24,16 @@ func (f *Factory) ExecuteTx(ctx context.Context, cb CallbackFunc) error {
 	if err != nil {
 		return err
 	}
-	defer tx.Rollback(ctx)
+	defer func() { _ = tx.Rollback(ctx) }()
 
 	store := storage_postgres.Tx{
 		DB: tx,
 	}
-	factoryExecute := Factory{
+	txFactory := Factory{
 		postgres: store,
 	}
 
-	if err = cb(&factoryExecute); err != nil {
+	if err = cb(&txFactory); err != nil {
 		return err
 	}
 
