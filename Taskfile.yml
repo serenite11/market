@@ -4,3 +4,5 @@ tasks:
     cmds:
       - protofmt -d -w ./proto/**/**/*.proto
       - buf generate
+  golines:
+    - find . -name "*.go" -exec golines -w --chain-split-dots -d {} +

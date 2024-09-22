@@ -2,6 +2,7 @@ package failure
 
 import (
 	"errors"
+
 	"github.com/gofiber/fiber/v2"
 	"go.uber.org/zap"
 )

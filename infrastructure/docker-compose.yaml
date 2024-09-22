@@ -1,0 +1,11 @@
+version: '3'
+
+volumes:
+  db:
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    volumes:
+      - db:/var/lib/postgresql/data

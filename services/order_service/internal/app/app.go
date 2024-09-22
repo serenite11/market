@@ -2,19 +2,18 @@ package app
 
 import (
 	"github.com/serenite11/market/services/order-service/config"
-	api_grpc "github.com/serenite11/market/services/order-service/internal/api/grpc"
-	"github.com/serenite11/market/services/order-service/internal/clients"
-	order_usecase "github.com/serenite11/market/services/order-service/internal/domain/order/usecase"
-	"github.com/serenite11/market/services/order-service/internal/factory"
+	"github.com/serenite11/market/services/order-service/internal/api"
+	"github.com/serenite11/market/services/order-service/internal/domain"
+	"github.com/serenite11/market/services/order-service/internal/infra/factory"
+	"github.com/serenite11/market/services/order-service/pkg/logger"
 	"go.uber.org/fx"
 )
 
-func New() *fx.App {
-	return fx.New(
-		clients.NewModule(),
+func CreateApp() fx.Option {
+	return fx.Options(
 		factory.NewModule(),
-		order_usecase.NewModule(),
-		api_grpc.NewModule(),
+		domain.NewModule(),
+		api.NewModule(),
 		fx.Provide(
 			config.New,
 			logger.New,

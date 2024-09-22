@@ -2,15 +2,10 @@ package kafka_producer
 
 import (
 	"context"
+
 	"github.com/IBM/sarama"
 	"go.uber.org/zap"
 )
-
-type Producer interface {
-	Send(topic string, message []byte) error
-	Connect(ctx context.Context) error
-	Close(ctx context.Context) error
-}
 
 type producer struct {
 	client sarama.SyncProducer

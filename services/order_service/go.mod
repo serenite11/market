@@ -10,12 +10,13 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.4
 	github.com/golang-migrate/migrate/v4 v4.17.1
 	github.com/google/uuid v1.6.0
+	github.com/guregu/null/v5 v5.0.0
 	github.com/huandu/go-sqlbuilder v1.27.3
 	github.com/jackc/pgconn v1.14.3
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jackc/pgx/v4 v4.18.2
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-colorable v0.1.13
+	github.com/onsi/ginkgo v1.16.4
 	github.com/serenite11/market/proto v0.0.0
 	go.uber.org/config v1.4.0
 	go.uber.org/fx v1.22.0
@@ -49,6 +50,7 @@ require (
 	github.com/jcmturner/gokrb5/v8 v8.4.4 // indirect
 	github.com/jcmturner/rpc/v2 v2.0.3 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect

@@ -1,21 +1,32 @@
 package order_model
 
 import (
-	"github.com/google/uuid"
-	"github.com/lib/pq"
-	"github.com/serenite11/market/proto/services/order_service_v1"
+	"github.com/goccy/go-json"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/guregu/null/v5"
+	"github.com/serenite11/market/proto/services/order_service_v1"
 )
+
+type ProductsAl []*order_service_v1.ProductOrder
 
 type Order struct {
 	Id          uuid.UUID                    `db:"id"`
 	Amount      float64                      `db:"amount"`
 	UserId      uuid.UUID                    `db:"user_id"`
 	Status      order_service_v1.OrderStatus `db:"status"`
-	Products    any                          `db:"products"`
+	Products    null.Value[ProductsAl]       `db:"products"`
 	CreatedAt   time.Time                    `db:"created_at"`
 	UpdatedAt   time.Time                    `db:"updated_at"`
-	CompletedAt pq.NullTime                  `db:"completed_at"`
+	CompletedAt null.Time                    `db:"completed_at"`
+}
+
+func (p *ProductsAl) Scan(value interface{}) error {
+	if value == nil {
+		return nil
+	}
+	return json.Unmarshal(value.([]byte), p)
 }
 
 func (o *Order) SetId(id uuid.UUID) *Order {
@@ -38,15 +49,15 @@ func (o *Order) SetStatus(status order_service_v1.OrderStatus) *Order {
 	return o
 }
 
-func (o *Order) SetProducts(products any) *Order {
-	o.Products = products
+func (o *Order) SetProducts(products []*order_service_v1.ProductOrder) *Order {
+	o.Products = null.NewValue[ProductsAl](products, len(products) != 0)
 	return o
 }
 func (o *Order) SetCreatedAt(createdAt time.Time) *Order {
 	o.CreatedAt = createdAt
 	return o
 }
-func (o *Order) SetCompletedAt(completedAt time.Time) *Order {
-	o.CompletedAt = pq.NullTime{}
+func (o *Order) SetCompleted() *Order {
+	o.CompletedAt = null.TimeFrom(time.Now())
 	return o
 }

@@ -2,14 +2,18 @@ package order_usecase
 
 import (
 	"context"
+	"github.com/serenite11/market/services/order-service/internal/infra/factory"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/serenite11/market/proto/services/order_service_v1"
 	order_model "github.com/serenite11/market/services/order-service/internal/domain/order/model"
-	"github.com/serenite11/market/services/order-service/internal/factory"
-	"time"
 )
 
-func (u uc) CreateOrder(ctx context.Context, request *order_service_v1.CreateOrder_Request) (*order_service_v1.CreateOrder_Response, error) {
+func (u uc) CreateOrder(
+	ctx context.Context,
+	request *order_service_v1.CreateOrder_Request,
+) (*order_service_v1.CreateOrder_Response, error) {
 	userId, err := uuid.Parse(request.UserId)
 	if err != nil {
 		return nil, ErrInvalidUser
@@ -32,9 +36,9 @@ func (u uc) CreateOrder(ctx context.Context, request *order_service_v1.CreateOrd
 	ctxCreateOrder, cancel := context.WithTimeout(ctx, time.Second*2)
 	defer cancel()
 
-	var orderId uuid.UUID
-	
-	if err = u.factory.ExecuteTx(ctx, func(tx *factory.Factory) error {
+	orderId := uuid.UUID{}
+
+	if err = u.factory.RunTx(ctx, func(tx *factory.Factory) error {
 		oId, err := tx.OrderRepo().Create(ctxCreateOrder, &order)
 		if err != nil {
 			return err

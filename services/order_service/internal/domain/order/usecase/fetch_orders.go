@@ -7,7 +7,10 @@ import (
 	"github.com/serenite11/market/proto/services/order_service_v1"
 )
 
-func (u uc) FetchOrders(ctx context.Context, request *order_service_v1.FetchOrdersByUserId_Request) (*order_service_v1.FetchOrdersByUserId_Response, error) {
+func (u uc) FetchOrders(
+	ctx context.Context,
+	request *order_service_v1.FetchOrdersByUserId_Request,
+) (*order_service_v1.FetchOrdersByUserId_Response, error) {
 	userId, err := uuid.Parse(request.UserId)
 	if err != nil {
 		return nil, err
@@ -18,5 +21,5 @@ func (u uc) FetchOrders(ctx context.Context, request *order_service_v1.FetchOrde
 	}
 	return &order_service_v1.FetchOrdersByUserId_Response{
 		Orders: u.Mapper().FromEntityOrdersToProto(orders),
-	},nil
+	}, nil
 }

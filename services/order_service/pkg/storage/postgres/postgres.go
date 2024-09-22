@@ -4,9 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/golang-migrate/migrate/v4"
 	"log"
 	"time"
+
+	"github.com/golang-migrate/migrate/v4"
 
 	"github.com/jackc/pgx/v4"
 
@@ -56,8 +57,13 @@ func (p *Pool) Connect(ctx context.Context) error {
 		p.cfg.Database,
 		p.cfg.SslMode,
 	)
-	connectionUrl += fmt.Sprintf(" pool_max_conns=%d pool_min_conns=%d pool_max_conn_lifetime=%v pool_max_conn_idle_time=%v",
-		_maxConnections, _minConnections, _maxConnectionLifeTime, _maxIdleLifeTime)
+	connectionUrl += fmt.Sprintf(
+		" pool_max_conns=%d pool_min_conns=%d pool_max_conn_lifetime=%v pool_max_conn_idle_time=%v",
+		_maxConnections,
+		_minConnections,
+		_maxConnectionLifeTime,
+		_maxIdleLifeTime,
+	)
 
 	connectionAttempts := _defaultConnectionAttempts
 	var result *pgxpool.Pool
@@ -70,7 +76,12 @@ func (p *Pool) Connect(ctx context.Context) error {
 			break
 		}
 
-		log.Printf("ATTEMPT %d TO CONNECT TO POSTGRES BY URL %s FAILED: %s\n", connectionAttempts, connectionUrl, err.Error())
+		log.Printf(
+			"ATTEMPT %d TO CONNECT TO POSTGRES BY URL %s FAILED: %s\n",
+			connectionAttempts,
+			connectionUrl,
+			err.Error(),
+		)
 
 		connectionAttempts--
 
@@ -133,7 +144,12 @@ func (p *Pool) Get(ctx context.Context, dest interface{}, query string, args ...
 	return pgxscan.DefaultAPI.ScanOne(dest, rows)
 }
 
-func (p *Pool) Select(ctx context.Context, dest interface{}, query string, args ...interface{}) error {
+func (p *Pool) Select(
+	ctx context.Context,
+	dest interface{},
+	query string,
+	args ...interface{},
+) error {
 	rows, err := p.db.Query(ctx, query, args...)
 	if err != nil {
 		return err

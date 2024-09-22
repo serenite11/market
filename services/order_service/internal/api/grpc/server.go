@@ -2,13 +2,14 @@ package api_grpc
 
 import (
 	"context"
+	"net"
+
 	"github.com/serenite11/market/proto/services/order_service_v1"
+	order_usecase "github.com/serenite11/market/services/order-service/internal/domain/order/usecase"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"net"
-	order_usecase "github.com/serenite11/market/services/order-service/internal/domain/order/usecase"
-) 
+)
 
 type Server struct {
 	grpc *grpc.Server

@@ -2,6 +2,7 @@ package factory
 
 import (
 	"context"
+
 	"github.com/google/uuid"
 	order_model "github.com/serenite11/market/services/order-service/internal/domain/order/model"
 )

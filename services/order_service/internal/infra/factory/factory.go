@@ -2,6 +2,7 @@ package factory
 
 import (
 	"context"
+
 	storage_postgres "github.com/serenite11/market/services/order-service/pkg/storage/postgres"
 )
 
@@ -19,7 +20,7 @@ func New(
 
 type CallbackFunc = func(f *Factory) error
 
-func (f *Factory) ExecuteTx(ctx context.Context, cb CallbackFunc) error {
+func (f *Factory) RunTx(ctx context.Context, cb CallbackFunc) error {
 	tx, err := f.postgres.Begin(ctx)
 	if err != nil {
 		return err
