@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package product_storage.v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/product-storage-v1;productstorage_v1';
+
+import "services/product-storage-v1/dto.proto";
+
+service ProductStorage {
+  rpc GetProductById (GetProductById.Request) returns (GetProductById.Response);
+  rpc FetchProducts  (FetchProducts.Request ) returns (FetchProducts.Response );
+}

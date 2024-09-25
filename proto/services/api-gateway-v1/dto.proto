@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package api_gateway.v1;
+
+option go_package = 'github.com/serenite11/market/proto/services/api-gateway-v1;apigateway_v1';
+
+message SignIn {
+  message Request {
+    string email    = 1;
+    string password = 2;
+  }
+
+  message Response {}
+
+}
+
